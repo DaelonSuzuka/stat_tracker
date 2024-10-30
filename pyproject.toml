@@ -1,0 +1,19 @@
+[project]
+name = "stat-tracker"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.uv]
+package = true
+dev-dependencies = [
+    "pytest",
+    "pytest-cov",
+    "twine",
+]
