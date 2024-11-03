@@ -69,6 +69,9 @@ class ListStat:
     def __contains__(self, item):
         return item in self._list
 
+    def __iter__(self):
+        yield from self._list
+
 
 class Stat(TimerStat, ValueStat, CountStat, ListStat):
     def __repr__(self):

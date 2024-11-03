@@ -61,3 +61,10 @@ def test_list():
     assert 'b' in stats.tags
     assert 'c' in stats.tags
     assert repr(stats.tags) == "['a', 'b', 'c']"
+
+    stats.list.append(5)
+    stats.list.append(10)
+    stats.list.append(15)
+
+    assert repr(stats.list) == '[5, 10, 15]'
+    assert sum(stats.list) == 30
