@@ -98,5 +98,15 @@ class StatTracker:
     def __getattr__(self, name: str) -> Stat:
         return self._records[name]
 
+    def __setattr__(self, name: str, value):
+        if name == '_records':
+            super().__setattr__(name, value)
+            return
+
+        if isinstance(value, Stat):
+            return
+
+        self._records[name]._value = value
+
     def __call__(self, name: str) -> Stat:
         return self._records[name]

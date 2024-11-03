@@ -17,11 +17,22 @@ def test_time():
 def test_value():
     stats = StatTracker()
 
-    for _ in range(5):
-        stats.value1 += 1
+    stats.value = 10
 
-    assert stats.value1 == 5
-    assert repr(stats.value1) == '5'
+    assert stats.value == 10
+    assert repr(stats.value) == '10'
+
+    for _ in range(5):
+        stats.value += 1
+
+    assert stats.value == 15
+    assert repr(stats.value) == '15'
+
+    for _ in range(5):
+        stats.value -= 1
+
+    assert stats.value == 10
+    assert repr(stats.value) == '10'
 
 
 def test_count():
