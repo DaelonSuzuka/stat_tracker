@@ -55,7 +55,7 @@ class CountStat:
             self._count += 1
 
 
-class Page(TimerStat, ValueStat, CountStat):
+class Stat(TimerStat, ValueStat, CountStat):
     # def __init__(self):
     #     super().__init__()
     #     self._list = []
@@ -70,21 +70,21 @@ class Page(TimerStat, ValueStat, CountStat):
         return f'{''}'
 
 
-class Bookie:
+class StatTracker:
     """A StatTracker collection object"""
 
     def __init__(self):
-        self._records = defaultdict(Page)
+        self._records = defaultdict(Stat)
 
-    def __getattr__(self, name: str) -> Page:
+    def __getattr__(self, name: str) -> Stat:
         return self._records[name]
 
-    def __call__(self, name: str) -> Page:
+    def __call__(self, name: str) -> Stat:
         return self._records[name]
 
 
 if __name__ == '__main__':
-    stats = Bookie()
+    stats = StatTracker()
 
     with stats.time1:
         sleep(0.05)
