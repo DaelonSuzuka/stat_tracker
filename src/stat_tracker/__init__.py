@@ -1,4 +1,4 @@
-from time import time, sleep
+from time import time
 from collections import defaultdict
 
 
@@ -56,10 +56,6 @@ class CountStat:
 
 
 class Stat(TimerStat, ValueStat, CountStat):
-    # def __init__(self):
-    #     super().__init__()
-    #     self._list = []
-
     def __repr__(self):
         if self._count is not None:
             return f'{self._count}'
@@ -68,6 +64,12 @@ class Stat(TimerStat, ValueStat, CountStat):
         if self._end_time:
             return f'{self._end_time - self._start_time:.2f}'
         return f'{''}'
+
+    def __eq__(self, other):
+        if self._count is not None:
+            return self._count == other
+        if self._value:
+            return self._value == other
 
 
 class StatTracker:
@@ -81,24 +83,3 @@ class StatTracker:
 
     def __call__(self, name: str) -> Stat:
         return self._records[name]
-
-
-if __name__ == '__main__':
-    stats = StatTracker()
-
-    with stats.time1:
-        sleep(0.05)
-
-    for _ in range(5):
-        stats.value1 += 1
-
-    for i in stats.loop1.count(range(10)):
-        pass
-
-    for i in stats('loop2').count(range(100)):
-        pass
-
-    print(f'time {stats.time1}')  # time 0.05
-    print(f'added {stats.value1}')  # added 5
-    print(f'counted {stats.loop1}')  # counted 10
-    print(f'counted {stats('loop2')}')  # counted 100
