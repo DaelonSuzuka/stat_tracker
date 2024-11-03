@@ -55,7 +55,22 @@ class CountStat:
             self._count += 1
 
 
-class Stat(TimerStat, ValueStat, CountStat):
+class ListStat:
+    def __init__(self):
+        super().__init__()
+        self._list = []
+
+    def append(self, other):
+        self._list.append(other)
+
+    def extend(self, other):
+        self._list.extend(other)
+
+    def __contains__(self, item):
+        return item in self._list
+
+
+class Stat(TimerStat, ValueStat, CountStat, ListStat):
     def __repr__(self):
         if self._count is not None:
             return f'{self._count}'
@@ -63,6 +78,8 @@ class Stat(TimerStat, ValueStat, CountStat):
             return f'{self._value}'
         if self._end_time:
             return f'{self._end_time - self._start_time:.2f}'
+        if self._list:
+            return f'{self._list}'
         return f'{''}'
 
     def __eq__(self, other):

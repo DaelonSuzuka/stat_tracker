@@ -23,8 +23,12 @@ for i in stats.loop1.count(range(10)):
 for i in stats('loop2').count(range(100)):
     pass
 
+stats.tags.append('a')
+stats.tags.extend(['b', 'c'])
+
 print(f'time {stats.time1}')  # time 0.05
 print(f'added {stats.value1}')  # added 5
 print(f'counted {stats.loop1}')  # counted 10
 print(f'counted {stats('loop2')}')  # counted 100
+print(f'gathered {stats.tags}')  # gathered ['a', 'b', 'c']
 ```
